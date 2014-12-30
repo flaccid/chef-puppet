@@ -33,7 +33,7 @@ default['puppet']['master_conf']['master']['ssl_client_header']        = 'SSL_CL
 default['puppet']['master_conf']['master']['ssl_client_verify_header'] = 'SSL_CLIENT_VERIFY'
 
 # By default only hostnames that end in *.local will be autosigned
-default['puppet']['autosign']['whitelist'] = [ '*.local' ]
+default['puppet']['autosign']['whitelist'] = ['*.local']
 
 # These gems and packages are for the master and passenger recipes
 default['puppet']['passenger']['gems'] = %w(rack passenger)
