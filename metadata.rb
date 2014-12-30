@@ -17,3 +17,9 @@ recipe 'puppet::default',      'Currently does nothing.'
 recipe 'puppet::aws',          'Fixes up the hostname on EC2 instances.'
 recipe 'puppet::client',       'Configures a Puppet Client.'
 recipe 'puppet::master',       'Configures a Puppet Master.'
+
+attribute 'puppet/client_conf/main/server',
+          display_name: 'Puppet Master Hostname',
+          description: 'The hostname of the Puppet Master.',
+          default: 'localhost',
+          recipes: ['puppet::default', 'puppet::master', 'puppet::client']
