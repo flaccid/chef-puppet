@@ -46,7 +46,7 @@ node['puppet']['passenger']['gems'].each { |rubygem| chef_gem rubygem }
 
 # Fetch the Phusion Passenger version
 # This must be done after passenger is installed!
-node.default['puppet']['passenger']['version'] = `passenger -v 2>&1 | head -1 | awk '{ print $4 }'`.chomp
+node.default['puppet']['passenger']['version'] = Mixlib::ShellOut.new("passenger -v 2>&1 | head -1 | awk '{ print $4 }'`.chomp")
 
 # Enable mod_ssl, configure puppet apache vhost
 case node['platform_family']
