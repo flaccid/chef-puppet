@@ -1,3 +1,5 @@
+# Encoding: utf-8
+
 name              'puppet'
 maintainer        'Fletcher Nichol'
 maintainer_email  'fnichol@nichol.ca'
@@ -10,3 +12,8 @@ supports 'ubuntu'
 
 depends 'apt'
 depends 'yum'
+
+recipe 'puppet::default',      'Currently does nothing.'
+recipe 'puppet::aws',          'Fixes up the hostname on EC2 instances.'
+recipe 'puppet::client',       'Configures a Puppet Client.'
+recipe 'puppet::master',       'Configures a Puppet Master.'
