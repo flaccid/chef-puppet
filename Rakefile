@@ -1,9 +1,15 @@
 #!/usr/bin/env rake
 
 require 'foodcritic'
+require 'rubocop/rake_task'
 
-FoodCritic::Rake::LintTask.new do |t|
-  t.options = { fail_tags: ['any'] }
+namespace :test do
+  RuboCop::RakeTask.new(:rubocop)
+  FoodCritic::Rake::LintTask.new(:foodcritic) do |t|
+    t.options = { fail_tags: ['any'] }
+  end
+
+  task all: [:rubocop, :foodcritic]
 end
 
-task default: [:foodcritic]
+task default: 'test:all'
