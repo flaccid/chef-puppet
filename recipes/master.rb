@@ -51,5 +51,5 @@ end
 
 service 'puppetmaster' do
   supports  status: true, restart: true, reload: false
-  action    [ :enable, :start ]
+  action    [:enable, :start]
 end
