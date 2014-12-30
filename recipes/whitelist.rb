@@ -23,6 +23,6 @@ template '/etc/puppet/autosign.conf' do
   source 'autosign.conf.erb'
   mode '0644'
   variables(
-    :whitelist => node['puppet']['autosign']['whitelist']
+    whitelist: node['puppet']['autosign']['whitelist']
   )
 end
