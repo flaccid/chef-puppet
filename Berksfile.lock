@@ -1,0 +1,11 @@
+DEPENDENCIES
+  puppet
+    path: .
+    metadata: true
+
+GRAPH
+  apt (2.6.1)
+  puppet (0.2.1)
+    apt (>= 0.0.0)
+    yum (>= 0.0.0)
+  yum (3.5.2)
