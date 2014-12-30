@@ -17,15 +17,15 @@
 # limitations under the License.
 #
 
-majver = node['platform_version'].split(".")[0]
+majver = node['platform_version'].split('.')[0]
 
 case node['platform_family']
 when 'debian'
-  apt_repository "puppetlabs" do
-    uri           "http://apt.puppetlabs.com/"
+  apt_repository 'puppetlabs' do
+    uri           'http://apt.puppetlabs.com/'
     distribution  node['lsb']['codename']
-    components    ["main"]
-    key           "http://apt.puppetlabs.com/pubkey.gpg"
+    components    ['main']
+    key           'http://apt.puppetlabs.com/pubkey.gpg'
   end
 when 'rhel'
   # We use 'remote_file' and 'package' instead of 'yum_repo' here because
@@ -43,13 +43,13 @@ package node['puppet']['package_name'] do
   action :install
 end
 
-template "/etc/puppet/puppet.conf" do
-  source  "puppet.conf.erb"
-  mode    "0644"
+template '/etc/puppet/puppet.conf' do
+  source  'puppet.conf.erb'
+  mode    '0644'
   variables(:conf => node['puppet']['master_conf'])
 end
 
-service "puppetmaster" do
+service 'puppetmaster' do
   supports  :status => true, :restart => true, :reload => false
   action    [ :enable, :start ]
 end
