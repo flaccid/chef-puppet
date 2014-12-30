@@ -49,7 +49,7 @@ end
 template '/etc/puppet/puppet.conf' do
   source  'puppet.conf.erb'
   mode    '0644'
-  variables(:conf => node['puppet']['client_conf'])
+  variables(conf: node['puppet']['client_conf'])
   notifies :restart, 'service[puppet]', :delayed
 end
 
