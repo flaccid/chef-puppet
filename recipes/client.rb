@@ -18,15 +18,15 @@
 #
 
 # Installs the puppet client and starts up puppet agent
-majver = node['platform_version'].split(".")[0]
+majver = node['platform_version'].split('.')[0]
 
 case node['platform_family']
 when 'debian'
-  apt_repository "puppetlabs" do
-    uri           "http://apt.puppetlabs.com/"
+  apt_repository 'puppetlabs' do
+    uri           'http://apt.puppetlabs.com/'
     distribution  node['lsb']['codename']
-    components    ["main"]
-    key           "http://apt.puppetlabs.com/pubkey.gpg"
+    components    ['main']
+    key           'http://apt.puppetlabs.com/pubkey.gpg'
   end
 when 'rhel'
   remote_file "#{Chef::Config[:file_cache_path]}/puppetlabs-release-el-#{majver}.noarch.rpm" do
@@ -50,7 +50,7 @@ template '/etc/puppet/puppet.conf' do
   source  'puppet.conf.erb'
   mode    '0644'
   variables(:conf => node['puppet']['client_conf'])
-  notifies :restart, "service[puppet]", :delayed
+  notifies :restart, 'service[puppet]', :delayed
 end
 
 # Runs puppet agent
