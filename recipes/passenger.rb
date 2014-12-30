@@ -42,12 +42,7 @@ node['puppet']['passenger']['packages'].each do |pack|
   p.run_action(:install)
 end
 
-node['puppet']['passenger']['gems'].each do |rubygem|
-  r = gem_package rubygem do
-    action :nothing
-  end
-  r.run_action(:install)
-end
+node['puppet']['passenger']['gems'].each { |rubygem| chef_gem rubygem }
 
 # Fetch the Phusion Passenger version
 # This must be done after passenger is installed!
