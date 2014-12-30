@@ -72,7 +72,7 @@ when 'rhel'
     group 'puppet'
     action :create
     variables(
-      :passenger_version => node['puppet']['passenger']['version']
+      passenger_version: node['puppet']['passenger']['version']
     )
   end
 

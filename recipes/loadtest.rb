@@ -25,7 +25,7 @@ template '/etc/puppet/manifests/modules.pp' do
   owner 'root'
   group 'root'
   variables(
-    :modules => node['puppet']['modules']['install']
+    modules: node['puppet']['modules']['install']
   )
 end
 
@@ -35,7 +35,7 @@ template '/etc/puppet/manifests/nodes.pp' do
   owner 'root'
   group 'root'
   variables(
-    :modules => node['puppet']['modules']['loadtest']
+    modules: node['puppet']['modules']['loadtest']
   )
 end
 
@@ -45,7 +45,7 @@ template '/etc/puppet/manifests/site.pp' do
   owner 'root'
   group 'root'
   variables(
-    :hostname => node['ec2']['public_hostname']
+    hostname: node['ec2']['public_hostname']
   )
 end
 
