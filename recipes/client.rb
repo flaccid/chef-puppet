@@ -42,18 +42,18 @@ package 'puppet' do
   action :install
 end
 
+service 'puppet' do
+  action :enable
+end
+
 template '/etc/puppet/puppet.conf' do
   source  'puppet.conf.erb'
   mode    '0644'
   variables(:conf => node['puppet']['client_conf'])
+  notifies :restart, "service[puppet]", :delayed
 end
 
 # Runs puppet agent
 # execute 'puppet agent -t' do
 #   returns [0, 2]
-# end
-
-# Starts the puppet agent service 
-# service 'puppet' do
-#   action [ :start, :enable ]
 # end
