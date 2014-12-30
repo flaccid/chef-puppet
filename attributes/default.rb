@@ -77,13 +77,12 @@ if !node['cloud'].nil?
     default['puppet']['master_conf']['main']['certname'] = node['ec2']['local_hostname']
     default['puppet']['master_conf']['main']['dns_alt_names'] = "puppet, #{node['ec2']['local_hostname']}"
     # This is a *very* open configuration. Do NOT use it in production!
-    default['puppet']['autosign']['whitelist'] = [ 
-      '*.com',
-      '*.net',
-      '*.org',
-      '*.local',
-      '*.ec2.internal',
-      '*.compute-1.amazonaws.com',
-      'puppet' ]
+    default['puppet']['autosign']['whitelist'] = ['*.com',
+                                                  '*.net',
+                                                  '*.org',
+                                                  '*.local',
+                                                  '*.ec2.internal',
+                                                  '*.compute-1.amazonaws.com',
+                                                  'puppet']
   end
 end

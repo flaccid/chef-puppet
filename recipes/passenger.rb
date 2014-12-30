@@ -31,7 +31,7 @@ end
 
 # Stop and disable the WEBrick puppetmaster
 service 'puppetmaster' do
-  action [ :stop, :disable ]
+  action [:stop, :disable]
 end
 
 # Install prerequisites and Ruby gems during compile phase
@@ -118,5 +118,5 @@ execute 'chown -R puppet:puppet /usr/share/puppet'
 # Finally we can start up Apache with the passenger module enabled.
 # And they said Chef was hard!
 service apachename do
-  action [ :enable, :restart ]
+  action [:enable, :restart]
 end
