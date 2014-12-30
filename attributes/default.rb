@@ -70,7 +70,7 @@ default['puppet']['server_ip'] = '127.0.0.1'
 # Amazon AWS EC2 settings
 # Auto-detect if we are in ec2, set hostname and ip address appropriately
 ##############################################################################
-if !node['cloud'].nil?
+unless node['cloud'].nil?
   if node['cloud']['provider'] == 'ec2'
     default['puppet']['server_ip'] = node['ipaddress']
     default['puppet']['client_conf']['main']['server'] = node['ec2']['local_hostname']
