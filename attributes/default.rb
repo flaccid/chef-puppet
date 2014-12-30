@@ -70,18 +70,20 @@ default['puppet']['server_ip'] = '127.0.0.1'
 # Amazon AWS EC2 settings
 # Auto-detect if we are in ec2, set hostname and ip address appropriately
 ##############################################################################
-if node['cloud']['provider'] == 'ec2'
-  default['puppet']['server_ip'] = node['ipaddress']
-  default['puppet']['client_conf']['main']['server'] = node['ec2']['public_hostname']
-  default['puppet']['master_conf']['main']['certname'] = node['ec2']['public_hostname']
-  default['puppet']['master_conf']['main']['dns_alt_names'] = "puppet, #{node['ec2']['local_hostname']}"
-  # This is a *very* open configuration. Do NOT use it in production!
-  default['puppet']['autosign']['whitelist'] = [ 
-    '*.com',
-    '*.net',
-    '*.org',
-    '*.local',
-    '*.ec2.internal',
-    '*.compute-1.amazonaws.com',
-    'puppet' ]
+if !node['cloud'].nil?
+  if node['cloud']['provider'] == 'ec2'
+    default['puppet']['server_ip'] = node['ipaddress']
+    default['puppet']['client_conf']['main']['server'] = node['ec2']['public_hostname']
+    default['puppet']['master_conf']['main']['certname'] = node['ec2']['public_hostname']
+    default['puppet']['master_conf']['main']['dns_alt_names'] = "puppet, #{node['ec2']['local_hostname']}"
+    # This is a *very* open configuration. Do NOT use it in production!
+    default['puppet']['autosign']['whitelist'] = [ 
+      '*.com',
+      '*.net',
+      '*.org',
+      '*.local',
+      '*.ec2.internal',
+      '*.compute-1.amazonaws.com',
+      'puppet' ]
+  end
 end
