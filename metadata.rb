@@ -30,3 +30,8 @@ attribute 'puppet/autosign/whitelist',
           default: ['*.com', '*.net', '*.org', '*.local', '*.ec2.internal', '*.compute-1.amazonaws.com', 'puppet'],
           type: 'array',
           recipes: ['puppet::default', 'puppet::master']
+
+attribute 'puppet/master_conf/main/certname',
+          display_name: 'Puppet Master Certificate Name',
+          description: 'The certname directive (CN) for the Puppet Master (default is node[\'fqdn\']).',
+          recipes:  ['puppet::default', 'puppet::master']
