@@ -73,8 +73,7 @@ default['puppet']['server_ip'] = '127.0.0.1'
 unless node['cloud'].nil?
   if node['cloud']['provider'] == 'ec2'
     default['puppet']['server_ip'] = node['ipaddress']
-    default['puppet']['client_conf']['main']['server'] = node['ec2']['local_hostname']
-    default['puppet']['master_conf']['main']['certname'] = node['ec2']['local_hostname']
+    default['puppet']['master_conf']['main']['certname'] = node['fqdn']
     default['puppet']['master_conf']['main']['dns_alt_names'] = "puppet, #{node['ec2']['local_hostname']}"
     # This is a *very* open configuration. Do NOT use it in production!
     default['puppet']['autosign']['whitelist'] = ['*.com',
