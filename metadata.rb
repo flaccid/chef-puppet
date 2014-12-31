@@ -28,4 +28,5 @@ attribute 'puppet/autosign/whitelist',
           display_name: 'Puppet Master Autosign Whitelist',
           description: 'A list of client hostnames to whitelist, allowing autosigning of their certificates.',
           default: ['*.com', '*.net', '*.org', '*.local', '*.ec2.internal', '*.compute-1.amazonaws.com', 'puppet'],
+          type: 'array',
           recipes: ['puppet::default', 'puppet::master']
