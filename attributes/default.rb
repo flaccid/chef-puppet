@@ -29,7 +29,7 @@ default['puppet']['master_conf']['main']['rundir']      = '/var/run/puppet'
 default['puppet']['master_conf']['main']['autosign']    = '$confdir/autosign.conf'
 default['puppet']['master_conf']['main']['factpath']    = '$vardir/lib/facter'
 default['puppet']['master_conf']['main']['templatedir'] = '$confdir/templates'
-default['puppet']['master_conf']['main']['server']      = 'localhost'
+default['puppet']['master_conf']['main']['certname']    = 'localhost'
 default['puppet']['master_conf']['master']['ssl_client_header']        = 'SSL_CLIENT_S_DN'
 default['puppet']['master_conf']['master']['ssl_client_verify_header'] = 'SSL_CLIENT_VERIFY'
 
@@ -86,3 +86,5 @@ unless node['cloud'].nil?
                                                   'puppet']
   end
 end
+
+default['puppet']['master_conf']['main']['server'] = node['puppet']['master_conf']['main']['certname']
