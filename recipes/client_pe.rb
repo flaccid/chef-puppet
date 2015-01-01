@@ -19,6 +19,15 @@
 #
 
 # https://docs.puppetlabs.com/pe/latest/install_agents.html
+
+remote_file "#{Chef::Config[:file_cache_path]}/install.bash" do
+  source "https://#{node['puppet']['client_conf']['main']['server']}:8140/packages/current/install.bash"
+  owner 'root'
+  group 'root'
+  mode '755'
+  action :create_if_missing
+end
+
 execute 'install_pe_puppet_client' do
-  command "curl -k https://#{node['puppet']['client_conf']['main']['server']}:8140/packages/current/install.bash | bash"
+  command "#{Chef::Config[:file_cache_path]}/install.bash"
 end
