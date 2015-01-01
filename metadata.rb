@@ -26,7 +26,7 @@ attribute 'puppet/client_conf/main/server',
           display_name: 'Puppet Master Hostname',
           description: 'The hostname of the Puppet Master.',
           default: 'localhost',
-          recipes: ['puppet::default', 'puppet::master', 'puppet::client']
+          recipes: ['puppet::default', 'puppet::master', 'puppet::client', 'puppet::client_pe']
 
 attribute 'puppet/autosign/whitelist',
           display_name: 'Puppet Master Autosign Whitelist',
@@ -39,3 +39,27 @@ attribute 'puppet/master_conf/main/certname',
           display_name: 'Puppet Master Certificate Name',
           description: 'The certname directive (CN) for the Puppet Master (default is node[\'fqdn\']).',
           recipes:  ['puppet::default', 'puppet::master']
+
+attribute 'puppet/pe/puppet_version',
+          display_name: 'PE Puppet Version',
+          description: 'The version of PE Puppet to use (default 3.7.0)',
+          default: '3.7.0',
+          recipes: ['puppet::master_pe']
+
+attribute 'puppet/pe/puppet_enterpriseconsole_auth_password',
+          display_name: 'PE Puppet Console Password',
+          description: 'The PE console password.',
+          default: 'Super53cure',
+          recipes: ['puppet::master_pe']
+
+attribute 'puppet/pe/puppet_enterpriseconsole_auth_user_email',
+          display_name: 'PE Puppet Console User Email',
+          description: 'The PE console user email',
+          default: 'admin@example.com',
+          recipes: ['puppet::master_pe']
+
+attribute 'puppet/pe/puppet_enterpriseconsole_smtp_host',
+          display_name: 'PE Puppet Console SMTP Host',
+          description: 'The PE console\'s SMTP host',
+          default: 'localhost',
+          recipes: ['puppet::master_pe']
