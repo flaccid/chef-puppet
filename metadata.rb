@@ -12,6 +12,8 @@ supports 'ubuntu'
 
 depends 'apt'
 depends 'yum'
+depends 'ark'
+depends 'build-essential'
 
 recipe 'puppet::default',      'Currently does nothing.'
 recipe 'puppet::aws',          'Fixes up the hostname on EC2 instances.'
