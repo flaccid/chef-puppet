@@ -88,3 +88,16 @@ unless node['cloud'].nil?
 end
 
 default['puppet']['master_conf']['main']['server'] = node['puppet']['master_conf']['main']['certname']
+
+# pe-puppet
+default['puppet']['pe']['answers_template'] = 'monolithic-basic.txt.erb'
+default['puppet']['pe']['platform'] = 'ubuntu'
+default['puppet']['pe']['platform_version'] = '14.04'
+default['puppet']['pe']['arch'] = 'amd64'
+default['puppet']['pe']['puppet_version'] = '3.7.0'
+default['puppet']['pe']['puppet_enterpriseconsole_auth_password'] = 'Super53cure'
+default['puppet']['pe']['puppet_enterpriseconsole_auth_user_email'] = 'admin@example.com'
+default['puppet']['pe']['puppet_enterpriseconsole_smtp_host'] = 'localhost'
+default['puppet']['pe']['puppetdb_database_name'] = 'pe-puppetdb'
+default['puppet']['pe']['puppetdb_database_password'] = 'Uber53cure'
+default['puppet']['pe']['puppetdb_database_user'] = 'pe-puppetdb'
