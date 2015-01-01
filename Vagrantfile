@@ -9,11 +9,16 @@ Vagrant.configure('2') do |config|
   config.berkshelf.enabled = true
 
   config.vm.provision :chef_solo do |chef|
+    chef.cookbooks_path = File.expand_path('~/.berkshelf/cookbooks')
+    chef.json = {
+    }
     chef.run_list = [
       'recipe[puppet::master]'
     ]
-
     chef.json = {
+      'build-essential' => {
+        'compile_time' => true
+      }
     }
   end
 end
