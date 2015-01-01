@@ -23,9 +23,9 @@ include_recipe 'build-essential'
 include_recipe 'apt' if node['platform_family'] == 'debian'
 
 # import the Puppet Labs public key
-execute 'import_puppetlabs_gpg' do
-  command 'gpg --keyserver=pgp.mit.edu --recv-key 4BD6EC30'
-end
+# execute 'import_puppetlabs_gpg' do
+#  command 'gpg --keyserver=pgp.mit.edu --recv-key 4BD6EC30'
+# end
 
 # example reference url:
 # https://s3.amazonaws.com/pe-builds/released/3.7.0/puppet-enterprise-3.7.1-ubuntu-14.04-amd64.tar.gz
