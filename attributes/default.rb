@@ -91,10 +91,18 @@ default['puppet']['master_conf']['main']['server'] = node['puppet']['master_conf
 
 # pe-puppet
 default['puppet']['pe']['answers_template'] = 'monolithic-basic.txt.erb'
-default['puppet']['pe']['platform'] = 'ubuntu'
-default['puppet']['pe']['platform_version'] = '14.04'
+
+case node['platform_family']
+when 'debian'
+  default['puppet']['pe']['platform'] = 'ubuntu'
+  default['puppet']['pe']['platform_version'] = '14.04'
+when 'rhel'
+  default['puppet']['pe']['platform'] = 'el'
+  default['puppet']['pe']['platform_version'] = '6'
+end
+
 default['puppet']['pe']['arch'] = 'amd64'
-default['puppet']['pe']['puppet_version'] = '3.7.0'
+default['puppet']['pe']['puppet_version'] = '3.7.1'
 default['puppet']['pe']['puppet_enterpriseconsole_auth_password'] = 'Super53cure'
 default['puppet']['pe']['puppet_enterpriseconsole_auth_user_email'] = 'admin@example.com'
 default['puppet']['pe']['puppet_enterpriseconsole_smtp_host'] = 'localhost'
