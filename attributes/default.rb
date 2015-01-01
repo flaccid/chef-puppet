@@ -102,7 +102,7 @@ when 'rhel'
 end
 
 default['puppet']['pe']['arch'] = 'amd64'
-default['puppet']['pe']['puppet_version'] = '3.7.1'
+default['puppet']['pe']['puppet_version'] = '3.7.0'
 default['puppet']['pe']['puppet_enterpriseconsole_auth_password'] = 'Super53cure'
 default['puppet']['pe']['puppet_enterpriseconsole_auth_user_email'] = 'admin@example.com'
 default['puppet']['pe']['puppet_enterpriseconsole_smtp_host'] = 'localhost'
