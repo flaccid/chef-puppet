@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-include_recipe 'master_pe_services' if node['puppet']['edition'] == 'pe'
+include_recipe 'puppet::master_pe_services' if node['puppet']['edition'] == 'pe'
 
 # Configures the Puppet server's whitelist, which allows new clients
 # to auto-register.
