@@ -25,9 +25,9 @@ remote_file "#{Chef::Config[:file_cache_path]}/install.bash" do
   owner 'root'
   group 'root'
   mode '755'
-  action :create_if_missing
 end
 
 execute 'install_pe_puppet_client' do
-  command "#{Chef::Config[:file_cache_path]}/install.bash"
+  command "/bin/bash #{Chef::Config[:file_cache_path]}/install.bash"
+  not_if { ::File.exist?('/opt/puppet/bin/puppet') }
 end
