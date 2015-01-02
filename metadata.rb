@@ -23,6 +23,7 @@ recipe 'puppet::master',       'Configures a Puppet Master.'
 recipe 'puppet::master_pe',    'Configures a PE Puppet Master.'
 recipe 'puppet::agent_td',     'Executes puppet agent -td.'
 recipe 'puppet::whitelist',    'Configures autosigning of client certificates.'
+recipe 'puppet::master_pe_services', 'Defines all puppet-pe service resources (this recipe is for inclusion only).'
 
 attribute 'puppet/edition',
           display_name: 'Puppet Edition',
