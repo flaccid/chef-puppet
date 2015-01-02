@@ -22,6 +22,13 @@ recipe 'puppet::client_pe',    'Configures a PE Puppet Client.'
 recipe 'puppet::master',       'Configures a Puppet Master.'
 recipe 'puppet::master_pe',    'Configures a PE Puppet Master.'
 recipe 'puppet::agent_td',     'Executes puppet agent -td.'
+recipe 'puppet::whitelist',    'Configures autosigning of client certificates.'
+
+attribute 'puppet/edition',
+          display_name: 'Puppet Edition',
+          description: 'The edition of Puppet, oss or pe.',
+          default: 'oss',
+          recipes: ['puppet::default', 'puppet::whitelist']
 
 attribute 'puppet/client_conf/main/server',
           display_name: 'Puppet Master Hostname',
@@ -34,7 +41,7 @@ attribute 'puppet/autosign/whitelist',
           description: 'A list of client hostnames to whitelist, allowing autosigning of their certificates.',
           default: ['*.com', '*.net', '*.org', '*.local', '*.ec2.internal', '*.compute-1.amazonaws.com', 'puppet'],
           type: 'array',
-          recipes: ['puppet::default', 'puppet::master']
+          recipes: ['puppet::default', 'puppet::master', 'puppet::whitelist']
 
 attribute 'puppet/master_conf/main/certname',
           display_name: 'Puppet Master Certificate Name',

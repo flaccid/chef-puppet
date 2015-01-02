@@ -17,6 +17,8 @@
 # limitations under the License.
 #
 
+default['puppet']['edition'] = 'oss'
+
 ##############################################################################
 # Server specific configurations
 # Everything in the master_conf hash is included in puppet.conf when you use
@@ -88,6 +90,13 @@ unless node['cloud'].nil?
 end
 
 default['puppet']['master_conf']['main']['server'] = node['puppet']['master_conf']['main']['certname']
+
+case node['puppet']['edition']
+when 'oss'
+  default['puppet']['confdir'] = '/etc/puppet'
+when 'pe'
+  default['puppet']['confdir'] = '/etc/puppetlabs/puppet'
+end
 
 # pe-puppet
 default['puppet']['pe']['answers_template'] = 'monolithic-basic.txt.erb'
