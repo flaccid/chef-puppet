@@ -56,6 +56,13 @@ execute 'install_pe-puppet' do
   command "./puppet-enterprise-installer -a #{Chef::Config[:file_cache_path]}/puppet_install_answers.txt"
 end
 
-service 'pe-puppet' do
-  action :restart
-end
+service 'pe-activemq'
+service 'pe-console-services'
+service 'pe-httpd'
+service 'pe-mcollective'
+service 'pe-memcached'
+service 'pe-postgresql'
+service 'pe-puppet'
+service 'pe-puppet-dashboard-workers'
+service 'pe-puppetdb'
+service 'pe-puppetserver'
