@@ -25,6 +25,7 @@ include_recipe 'apt' if node['platform_family'] == 'debian'
 # import the Puppet Labs public key
 execute 'import_puppetlabs_gpg' do
   command 'gpg --keyserver=pgp.mit.edu --recv-key 4BD6EC30'
+  not_if { ::Mixlib::ShellOut.new('gpg --list-keys').stdout.include?('4BD6EC30') }
 end
 
 # example reference url:
@@ -56,13 +57,4 @@ execute 'install_pe-puppet' do
   command "./puppet-enterprise-installer -a #{Chef::Config[:file_cache_path]}/puppet_install_answers.txt"
 end
 
-service 'pe-activemq'
-service 'pe-console-services'
-service 'pe-httpd'
-service 'pe-mcollective'
-service 'pe-memcached'
-service 'pe-postgresql'
-service 'pe-puppet'
-service 'pe-puppet-dashboard-workers'
-service 'pe-puppetdb'
-service 'pe-puppetserver'
+include_recipe 'puppet::master_pe_services'
