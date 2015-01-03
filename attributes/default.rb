@@ -18,6 +18,17 @@
 #
 
 default['puppet']['edition'] = 'oss'
+default['puppet']['server_ip'] = '127.0.0.1'
+
+# By default the following will be autosigned;
+# Ensure your server is only accessible by your nodes (not public).
+default['puppet']['autosign']['whitelist'] = ['*.com',
+                                              '*.net',
+                                              '*.org',
+                                              '*.local',
+                                              '*.ec2.internal',
+                                              '*.compute-1.amazonaws.com',
+                                              'puppet']
 
 ##############################################################################
 # Server specific configurations
@@ -31,12 +42,11 @@ default['puppet']['master_conf']['main']['rundir']      = '/var/run/puppet'
 default['puppet']['master_conf']['main']['autosign']    = '$confdir/autosign.conf'
 default['puppet']['master_conf']['main']['factpath']    = '$vardir/lib/facter'
 default['puppet']['master_conf']['main']['templatedir'] = '$confdir/templates'
-default['puppet']['master_conf']['main']['certname']    = 'localhost'
+default['puppet']['master_conf']['main']['certname']    = node['fqdn']
+default['puppet']['master_conf']['main']['server']      = node['puppet']['master_conf']['main']['certname']
+default['puppet']['master_conf']['main']['dns_alt_names'] = 'puppet'
 default['puppet']['master_conf']['master']['ssl_client_header']        = 'SSL_CLIENT_S_DN'
 default['puppet']['master_conf']['master']['ssl_client_verify_header'] = 'SSL_CLIENT_VERIFY'
-
-# By default only hostnames that end in *.local will be autosigned
-default['puppet']['autosign']['whitelist'] = ['*.local']
 
 # These gems and packages are for the master and passenger recipes
 default['puppet']['passenger']['gems'] = %w(rack passenger)
@@ -67,30 +77,18 @@ default['puppet']['client_conf']['main']['rundir']      = '/var/run/puppet'
 default['puppet']['client_conf']['main']['factpath']    = '$vardir/lib/facter'
 default['puppet']['client_conf']['main']['templatedir'] = '$confdir/templates'
 default['puppet']['client_conf']['main']['server']      = 'localhost'
-default['puppet']['server_ip'] = '127.0.0.1'
 
 ##############################################################################
 # Amazon AWS EC2 settings
-# Auto-detect if we are in ec2, set hostname and ip address appropriately
+# Auto-detect if we are in ec2, append local hostname to dns_alt_names
 ##############################################################################
 unless node['cloud'].nil?
   if node['cloud']['provider'] == 'ec2'
-    default['puppet']['server_ip'] = node['ipaddress']
-    default['puppet']['master_conf']['main']['certname'] = node['fqdn']
     default['puppet']['master_conf']['main']['dns_alt_names'] = "puppet, #{node['ec2']['local_hostname']}"
-    # This is a *very* open configuration. Do NOT use it in production!
-    default['puppet']['autosign']['whitelist'] = ['*.com',
-                                                  '*.net',
-                                                  '*.org',
-                                                  '*.local',
-                                                  '*.ec2.internal',
-                                                  '*.compute-1.amazonaws.com',
-                                                  'puppet']
   end
 end
 
-default['puppet']['master_conf']['main']['server'] = node['puppet']['master_conf']['main']['certname']
-
+# pe-puppet has different filesystem hierachy :(
 case node['puppet']['edition']
 when 'oss'
   default['puppet']['confdir'] = '/etc/puppet'
@@ -100,7 +98,6 @@ end
 
 # pe-puppet
 default['puppet']['pe']['answers_template'] = 'monolithic-basic.txt.erb'
-
 default['puppet']['pe']['arch'] = 'x86_64'
 
 case node['platform_family']
