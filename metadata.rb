@@ -11,6 +11,7 @@ version           '0.2.1'
 supports 'ubuntu'
 
 depends 'apt'
+depends 'hostsfile'
 depends 'yum'
 depends 'ark'
 depends 'build-essential'
@@ -23,6 +24,7 @@ recipe 'puppet::master',       'Configures a Puppet Master.'
 recipe 'puppet::master_pe',    'Configures a PE Puppet Master.'
 recipe 'puppet::agent_td',     'Executes puppet agent -td.'
 recipe 'puppet::whitelist',    'Configures autosigning of client certificates.'
+recipe 'puppet::hostsfile',    'Adds an entry to /etc/hosts for the puppet master if required.'
 recipe 'puppet::master_pe_services', 'Defines all puppet-pe service resources (this recipe is for inclusion only).'
 
 attribute 'puppet/edition',
@@ -31,11 +33,17 @@ attribute 'puppet/edition',
           default: 'oss',
           recipes: ['puppet::default', 'puppet::whitelist']
 
+attribute 'puppet/server_ip',
+          display_name: 'Puppet Master Server IP',
+          description: 'The Puppet Master IP address (only use if the Puppet Master Hostname is not resolvable).',
+          default: '127.0.0.1',
+          recipes: ['puppet::hostsfile']
+
 attribute 'puppet/client_conf/main/server',
           display_name: 'Puppet Master Hostname',
           description: 'The hostname of the Puppet Master.',
           default: 'localhost',
-          recipes: ['puppet::default', 'puppet::master', 'puppet::client', 'puppet::client_pe']
+          recipes: ['puppet::default', 'puppet::master', 'puppet::client', 'puppet::client_pe', 'puppet::hostsfile']
 
 attribute 'puppet/autosign/whitelist',
           display_name: 'Puppet Master Autosign Whitelist',
