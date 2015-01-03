@@ -1,8 +1,9 @@
 #
 # Cookbook Name:: puppet
-# Recipe:: client
+# Recipe:: hostsfile
 #
 # Copyright 2014, Sean Carolan
+# Copyright 2015, Chris Fordham
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +18,11 @@
 # limitations under the License.
 #
 
-# Fix the /etc/hosts file with the address of the puppetmaster server
-execute "echo '#{node['puppet']['server_ip']} puppet #{node['puppet']['client_conf']['main']['server']}' >> /etc/hosts" do
-  not_if "grep -q #{node['puppet']['client_conf']['main']['server']} /etc/hosts"
+# Add an entry to /etc/hosts for the puppet master server IP
+# if explicitly set and not equal to localhost
+
+hostsfile_entry node['puppet']['server_ip'] do
+  hostname node['puppet']['client_conf']['main']['server']
+  not_if   { node['puppet']['server_ip'] == '127.0.0.1' }
+  action   :create
 end
