@@ -18,7 +18,11 @@
 #
 
 default['puppet']['edition'] = 'oss'
-default['puppet']['server_ip'] = '127.0.0.1'
+
+# IP for the server is only used when explicitly set by the user
+# for environments which don't have adequate resolution or
+# have a bad resolution pointing back to localhost
+default['puppet']['server_ip'] = nil
 
 # By default the following will be autosigned;
 # Ensure your server is only accessible by your nodes (not public).
