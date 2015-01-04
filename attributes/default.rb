@@ -80,7 +80,7 @@ default['puppet']['client_conf']['main']['ssldir']      = '/var/lib/puppet/ssl'
 default['puppet']['client_conf']['main']['rundir']      = '/var/run/puppet'
 default['puppet']['client_conf']['main']['factpath']    = '$vardir/lib/facter'
 default['puppet']['client_conf']['main']['templatedir'] = '$confdir/templates'
-default['puppet']['client_conf']['main']['server']      = 'localhost'
+default['puppet']['client_conf']['main']['server']      = 'puppet'
 
 ##############################################################################
 # Amazon AWS EC2 settings
@@ -88,7 +88,7 @@ default['puppet']['client_conf']['main']['server']      = 'localhost'
 ##############################################################################
 unless node['cloud'].nil?
   if node['cloud']['provider'] == 'ec2'
-    default['puppet']['master_conf']['main']['dns_alt_names'] = "puppet, #{node['ec2']['local_hostname']}"
+    node['puppet']['master_conf']['main']['dns_alt_names'] = "puppet, #{node['ec2']['local_hostname']}"
   end
 end
 
