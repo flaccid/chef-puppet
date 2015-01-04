@@ -21,7 +21,7 @@
 # https://docs.puppetlabs.com/pe/latest/install_agents.html
 
 remote_file "#{Chef::Config[:file_cache_path]}/install.bash" do
-  source "https://#{node['puppet']['client_conf']['main']['server']}:8140/packages/current/install.bash"
+  source "https://#{node['puppet']['server_ip'] || node['puppet']['client_conf']['main']['server']}:8140/packages/current/install.bash"
   owner 'root'
   group 'root'
   mode '755'
