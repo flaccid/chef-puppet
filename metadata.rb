@@ -36,8 +36,8 @@ attribute 'puppet/edition',
 attribute 'puppet/server_ip',
           display_name: 'Puppet Master Server IP',
           description: 'The Puppet Master IP address (only use if the Puppet Master Hostname is not resolvable).',
-          default: '127.0.0.1',
-          recipes: ['puppet::hostsfile']
+          required: 'optional',
+          recipes: ['puppet::hostsfile', 'puppet::client_pe']
 
 attribute 'puppet/client_conf/main/server',
           display_name: 'Puppet Master Hostname',
