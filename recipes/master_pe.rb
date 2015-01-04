@@ -48,7 +48,9 @@ template "#{Chef::Config[:file_cache_path]}/puppet_install_answers.txt" do
     puppet_enterpriseconsole_smtp_host: node['puppet']['pe']['puppet_enterpriseconsole_smtp_host'],
     puppetdb_database_name: node['puppet']['pe']['puppetdb_database_name'],
     puppetdb_database_password: node['puppet']['pe']['puppetdb_database_password'],
-    puppetdb_database_user: node['puppet']['pe']['puppetdb_database_user']
+    puppetdb_database_user: node['puppet']['pe']['puppetdb_database_user'],
+    puppetmaster_server: node['puppet']['master_conf']['main']['server'],
+    puppetmaster_certname: node['puppet']['master_conf']['main']['certname'] 
   )
 end
 
