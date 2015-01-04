@@ -40,10 +40,10 @@ attribute 'puppet/server_ip',
           recipes: ['puppet::hostsfile', 'puppet::client_pe']
 
 attribute 'puppet/client_conf/main/server',
-          display_name: 'Puppet Master Hostname',
-          description: 'The hostname of the Puppet Master.',
-          default: 'localhost',
-          recipes: ['puppet::default', 'puppet::master', 'puppet::client', 'puppet::client_pe', 'puppet::hostsfile']
+          display_name: 'Puppet Master Hostname (client)',
+          description: 'The hostname of the Puppet Master for the client.',
+          default: 'puppet',
+          recipes: ['puppet::default', 'puppet::client', 'puppet::client_pe', 'puppet::hostsfile']
 
 attribute 'puppet/autosign/whitelist',
           display_name: 'Puppet Master Autosign Whitelist',
@@ -52,10 +52,15 @@ attribute 'puppet/autosign/whitelist',
           type: 'array',
           recipes: ['puppet::default', 'puppet::master', 'puppet::whitelist']
 
+attribute 'puppet/master_conf/main/server',
+          display_name: 'Puppet Master Hostname',
+          description: 'The hostname of the Puppet Master.',
+          recipes:  ['puppet::default', 'puppet::master', 'puppet::master_pe']
+
 attribute 'puppet/master_conf/main/certname',
           display_name: 'Puppet Master Certificate Name',
           description: 'The certname directive (CN) for the Puppet Master (default is node[\'fqdn\']).',
-          recipes:  ['puppet::default', 'puppet::master']
+          recipes:  ['puppet::default', 'puppet::master', 'puppet::master']
 
 attribute 'puppet/pe/puppet_version',
           display_name: 'PE Puppet Version',
