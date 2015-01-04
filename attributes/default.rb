@@ -88,7 +88,7 @@ default['puppet']['client_conf']['main']['server']      = 'puppet'
 ##############################################################################
 unless node['cloud'].nil?
   if node['cloud']['provider'] == 'ec2'
-    node['puppet']['master_conf']['main']['dns_alt_names'] = "puppet, #{node['ec2']['local_hostname']}"
+    force_default['puppet']['master_conf']['main']['dns_alt_names'] = "puppet, #{node['ec2']['local_hostname']}"
   end
 end
 
