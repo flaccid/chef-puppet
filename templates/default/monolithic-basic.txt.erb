@@ -3,23 +3,23 @@ q_database_install=y
 q_fail_on_unsuccessful_master_lookup=n
 q_install=y
 q_pe_check_for_updates=n
+q_run_updtvpkg=n
+q_vendor_packages_install=y
 q_puppet_cloud_install=n
+q_puppet_symlinks_install=y
+q_puppet_enterpriseconsole_install=y
 q_puppet_enterpriseconsole_auth_password=<%= @puppet_enterpriseconsole_auth_password %>
 q_puppet_enterpriseconsole_auth_user_email=<%= @puppet_enterpriseconsole_auth_user_email %>
-q_puppet_enterpriseconsole_install=y
 q_puppet_enterpriseconsole_smtp_host=<%= @puppet_enterpriseconsole_smtp_host %>
-q_puppet_symlinks_install=y
-q_puppetagent_certname=`hostname --fqdn`
 q_puppetagent_install=y
-q_puppetagent_server=`hostname --fqdn`
+q_puppetagent_certname=`hostname --fqdn`
+q_puppetagent_server=<%= @puppetmaster_server %>
 q_puppetca_install=n
 q_puppetdb_install=n
 q_puppetdb_database_name=<%= @puppetdb_database_name %>
 q_puppetdb_database_password=<%= @puppetdb_database_password %>
 q_puppetdb_database_user=<%= @puppetdb_database_user %>
 q_puppetdb_plaintext_port=8080
-q_puppetmaster_certname=`hostname --fqdn`
-q_puppetmaster_dnsaltnames=pe-puppet,pe-puppet.`hostname -d`,`hostname --fqdn`
 q_puppetmaster_install=y
-q_run_updtvpkg=n
-q_vendor_packages_install=y
+q_puppetmaster_certname=<%= @puppetmaster_certname %>
+q_puppetmaster_dnsaltnames=pe-puppet,pe-puppet.`hostname -d`,`hostname --fqdn`
