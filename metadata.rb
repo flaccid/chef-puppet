@@ -60,7 +60,7 @@ attribute 'puppet/master_conf/main/server',
 attribute 'puppet/master_conf/main/certname',
           display_name: 'Puppet Master Certificate Name',
           description: 'The certname directive (CN) for the Puppet Master (default is node[\'fqdn\']).',
-          recipes:  ['puppet::default', 'puppet::master', 'puppet::master']
+          recipes:  ['puppet::default', 'puppet::master', 'puppet::master_pe']
 
 attribute 'puppet/pe/puppet_version',
           display_name: 'PE Puppet Version',
