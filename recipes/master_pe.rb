@@ -50,7 +50,7 @@ template "#{Chef::Config[:file_cache_path]}/puppet_install_answers.txt" do
     puppetdb_database_password: node['puppet']['pe']['puppetdb_database_password'],
     puppetdb_database_user: node['puppet']['pe']['puppetdb_database_user'],
     puppetmaster_server: node['puppet']['master_conf']['main']['server'],
-    puppetmaster_certname: node['puppet']['master_conf']['main']['certname'] 
+    puppetmaster_certname: node['puppet']['master_conf']['main']['certname']
   )
 end
 
