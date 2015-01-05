@@ -23,6 +23,6 @@
 
 hostsfile_entry node['puppet']['server_ip'] do
   hostname node['puppet']['client_conf']['main']['server']
-  not_if   { node['puppet']['server_ip'] == '127.0.0.1' }
+  not_if   { !node['puppet']['server_ip'] || node['puppet']['server_ip'] == '127.0.0.1' }
   action   :create
 end
