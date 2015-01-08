@@ -69,6 +69,8 @@ default['puppet']['modules']['install'] = %w(stdlib concat mysql java apache)
 # Modules you want to use in the load test recipe
 default['puppet']['modules']['loadtest'] = %w(stdlib mysql::server java apache)
 
+default['puppet']['agent']['environment'] = 'production'
+
 ##############################################################################
 # Client specific configurations
 # Everything in the master_conf hash is included in puppet.conf when you use
