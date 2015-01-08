@@ -45,6 +45,12 @@ attribute 'puppet/client_conf/main/server',
           default: 'puppet',
           recipes: ['puppet::default', 'puppet::client', 'puppet::client_pe', 'puppet::hostsfile']
 
+attribute 'puppet/agent/environment',
+          display_name: 'Puppet Agent Environment',
+          description: 'The environment the Puppet client is running in.',
+          default: 'production',
+          recipes: ['puppet::client_pe']
+
 attribute 'puppet/autosign/whitelist',
           display_name: 'Puppet Master Autosign Whitelist',
           description: 'A list of client hostnames to whitelist, allowing autosigning of their certificates.',
