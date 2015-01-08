@@ -28,6 +28,6 @@ remote_file "#{Chef::Config[:file_cache_path]}/install.bash" do
 end
 
 execute 'install_pe_puppet_client' do
-  command "/bin/bash #{Chef::Config[:file_cache_path]}/install.bash | /bin/bash -s agent:environment=#{node['puppet']['agent']['environment']}"
+  command "/bin/bash #{Chef::Config[:file_cache_path]}/install.bash agent:environment=#{node['puppet']['agent']['environment']}"
   not_if { ::File.exist?('/opt/puppet/bin/puppet') }
 end
