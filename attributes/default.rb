@@ -70,6 +70,7 @@ default['puppet']['modules']['install'] = %w(stdlib concat mysql java apache)
 default['puppet']['modules']['loadtest'] = %w(stdlib mysql::server java apache)
 
 default['puppet']['agent']['environment'] = 'production'
+default['puppet']['agent']['certname'] = node['fqdn']
 
 ##############################################################################
 # Client specific configurations

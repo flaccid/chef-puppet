@@ -51,6 +51,11 @@ attribute 'puppet/agent/environment',
           default: 'production',
           recipes: ['puppet::client_pe']
 
+attribute 'puppet/agent/certname',
+          display_name: 'Puppet Agent Certificate Name',
+          description: 'The Subject CN used of the Puppet agent.',
+          recipes: ['puppet::client_pe']
+
 attribute 'puppet/autosign/whitelist',
           display_name: 'Puppet Master Autosign Whitelist',
           description: 'A list of client hostnames to whitelist, allowing autosigning of their certificates.',
