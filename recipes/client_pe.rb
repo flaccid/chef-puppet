@@ -22,7 +22,7 @@
 
 # when an EC2 instance ID is provided for the certname, append the hostname
 if node['puppet']['agent']['certname'] =~ /i-[A-Za-z0-9_]{8}/
-  override['puppet']['agent']['certname'] = "#{node['puppet']['agent']['certname']}.#{node['fqdn']}"
+  node.override['puppet']['agent']['certname'] = "#{node['puppet']['agent']['certname']}.#{node['fqdn']}"
 end
 
 remote_file "#{Chef::Config[:file_cache_path]}/install.bash" do
