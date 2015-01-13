@@ -20,6 +20,11 @@
 
 # https://docs.puppetlabs.com/pe/latest/install_agents.html
 
+# when an EC2 instance ID is provided for the certname, append the hostname
+if node['puppet']['agent']['certname'] =~ /i-[A-Za-z0-9_]{8}/
+  override['puppet']['agent']['certname'] = "#{node['puppet']['agent']['certname']}.#{node['fqdn']}"
+end
+
 remote_file "#{Chef::Config[:file_cache_path]}/install.bash" do
   source "https://#{node['puppet']['server_ip'] || node['puppet']['client_conf']['main']['server']}:8140/packages/current/install.bash"
   owner 'root'
@@ -28,6 +33,6 @@ remote_file "#{Chef::Config[:file_cache_path]}/install.bash" do
 end
 
 execute 'install_pe_puppet_client' do
-  command "/bin/bash #{Chef::Config[:file_cache_path]}/install.bash agent:environment=#{node['puppet']['agent']['environment']}"
+  command "/bin/bash #{Chef::Config[:file_cache_path]}/install.bash agent:environment=#{node['puppet']['agent']['environment']} agent:certname=#{node['puppet']['agent']['certname']}"
   not_if { ::File.exist?('/opt/puppet/bin/puppet') }
 end
