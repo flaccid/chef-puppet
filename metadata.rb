@@ -75,7 +75,7 @@ attribute 'puppet/master_conf/main/certname',
 
 attribute 'puppet/pe/puppet_version',
           display_name: 'PE Puppet Version',
-          description: 'The version of PE Puppet to use (default 3.7.0)',
+          description: 'The version of PE Puppet to use (default 3.7.0). Note: currently the client will always install the version that the PE puppet master runs, regardless.',
           default: '3.7.0',
           recipes: ['puppet::master_pe', 'puppet::client_pe']
 
