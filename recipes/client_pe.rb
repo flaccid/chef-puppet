@@ -36,3 +36,13 @@ execute 'install_pe_puppet_client' do
   command "/bin/bash #{Chef::Config[:file_cache_path]}/install.bash agent:environment=#{node['puppet']['agent']['environment']} agent:certname=#{node['puppet']['agent']['certname']}"
   not_if { ::File.exist?('/opt/puppet/bin/puppet') }
 end
+
+execute 'manually_set_agent_certname' do
+  command "/opt/puppet/bin/puppet config set certname #{node['puppet']['agent']['certname']} --section agent"
+  only_if { node['puppet']['pe']['puppet_version'] < '3.7.0' }
+end
+
+execute 'manually_set_agent_environment' do
+  command "/opt/puppet/bin/puppet config set environment node['puppet']['agent']['environment'] --section agent"
+  only_if { node['puppet']['pe']['puppet_version'] < '3.7.0' }
+end
