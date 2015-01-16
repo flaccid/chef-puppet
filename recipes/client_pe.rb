@@ -43,6 +43,6 @@ execute 'manually_set_agent_certname' do
 end
 
 execute 'manually_set_agent_environment' do
-  command "/opt/puppet/bin/puppet config set environment node['puppet']['agent']['environment'] --section agent"
+  command "/opt/puppet/bin/puppet config set environment #{node['puppet']['agent']['environment']} --section agent"
   only_if { node['puppet']['pe']['puppet_version'] < '3.7.0' }
 end
