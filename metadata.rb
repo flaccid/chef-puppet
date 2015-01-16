@@ -77,7 +77,7 @@ attribute 'puppet/pe/puppet_version',
           display_name: 'PE Puppet Version',
           description: 'The version of PE Puppet to use (default 3.7.0)',
           default: '3.7.0',
-          recipes: ['puppet::master_pe']
+          recipes: ['puppet::master_pe', 'puppet::client_pe']
 
 attribute 'puppet/pe/puppet_enterpriseconsole_auth_password',
           display_name: 'PE Puppet Console Password',
