@@ -37,12 +37,24 @@ execute 'install_pe_puppet_client' do
   not_if { ::File.exist?('/opt/puppet/bin/puppet') }
 end
 
+file '/etc/puppetlabs/puppet/puppet.conf'
+
+service 'pe-puppet' do
+  supports restart: true, reload: true, status: true
+end
+
+service 'pe-mcollective' do
+  supports restart: true, reload: false, status: true
+end
+
 execute 'manually_set_agent_certname' do
   command "/opt/puppet/bin/puppet config set certname #{node['puppet']['agent']['certname']} --section agent"
   only_if { node['puppet']['pe']['puppet_version'] < '3.7.0' }
+  notifies :restart, 'service[pe-puppet]', :delayed
 end
 
 execute 'manually_set_agent_environment' do
   command "/opt/puppet/bin/puppet config set environment #{node['puppet']['agent']['environment']} --section agent"
   only_if { node['puppet']['pe']['puppet_version'] < '3.7.0' }
+  notifies :restart, 'service[pe-puppet]', :delayed
 end
